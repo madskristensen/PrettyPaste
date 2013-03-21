@@ -3,11 +3,11 @@
 	<Metadata>
 		<Identity Id="PasteR..5f7b47b4-c3d1-4252-bc32-ed92bbb93a8d" Version="1.0" Language="en-US" Publisher="Mads Kristensen" />
 		<DisplayName>PasteR</DisplayName>
-		<Description xml:space="preserve">This is a sample classifier extension to the Visual Studio Editor.</Description>
+		<Description xml:space="preserve">PasteR fixes the issue where copied text from IE introduces new blank lines when pasted into Visual Studio.</Description>
 		<License>License.txt</License>
 		<Icon>logo.png</Icon>
 		<PreviewImage>logo.png</PreviewImage>
-		<Tags>paste, </Tags>
+		<Tags>paste, copy, newline, blank, lines</Tags>
 	</Metadata>
 	<Installation>
 		<InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="11.0" />
