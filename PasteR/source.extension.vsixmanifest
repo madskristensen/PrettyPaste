@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
 	<Metadata>
-		<Identity Id="PasteR..5f7b47b4-c3d1-4252-bc32-ed92bbb93a8d" Version="1.1" Language="en-US" Publisher="Mads Kristensen" />
+		<Identity Id="PasteR..5f7b47b4-c3d1-4252-bc32-ed92bbb93a8d" Version="1.2" Language="en-US" Publisher="Mads Kristensen" />
 		<DisplayName>Paste FixR</DisplayName>
-		<Description xml:space="preserve">PasteR fixes the issue where copied text from IE introduces new blank lines when pasted into Visual Studio.</Description>
+		<Description xml:space="preserve">Fixes the issue where copied text from IE or Word introduces new blank lines when pasted into Visual Studio.</Description>
 		<License>License.txt</License>
 		<Icon>logo.png</Icon>
 		<PreviewImage>logo.png</PreviewImage>
