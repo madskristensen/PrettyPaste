@@ -29,14 +29,17 @@ namespace PasteR
                 }
             }
 
-            return (float)lines.Length / counter >= 2;
+            return (float)lines.Length / counter >= 2; // Minimum every other line must be empty
         }
 
         public static string Clean(string content)
         {
             string[] lines = content.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-
-            return string.Join(Environment.NewLine, lines);
+            
+            // Add a trailing newline to mimick the VS default paste behavior.
+            string result = string.Join(Environment.NewLine, lines) + Environment.NewLine;
+            
+            return result;
         }
     }
 }
