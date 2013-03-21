@@ -7,6 +7,12 @@ namespace PasteR
         public static bool IsDirty(string content)
         {
             string[] lines = content.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
+
+            // No reason to mark less than 3 lines of code dirty
+            if (lines.Length < 2)
+            {
+                return false;
+            }
             
             int counter = 0;
             bool prevIsEmpty = false;
@@ -23,7 +29,7 @@ namespace PasteR
                 prevIsEmpty = isEmpty;
 
                 // Let's break the loop early if the content isn't dirty
-                if (i > 50 && counter < 10)
+                if (i > 50 && counter < 20)
                 {
                     break;
                 }
