@@ -14,7 +14,7 @@ namespace PasteR
                 return false;
             }
             
-            int counter = 0;
+            float counter = 0;
             bool prevIsEmpty = false;
 
             for (int i = 0; i < lines.Length; i++)
@@ -35,7 +35,7 @@ namespace PasteR
                 }
             }
 
-            return (float)lines.Length / counter >= 2; // Minimum every other line must be empty
+            return (float)lines.Length / counter <= 2.5F; // Minimum every other line must be empty
         }
 
         public static string Clean(string content)
