@@ -26,10 +26,11 @@ namespace PasteR
                 if (Clipboard.ContainsText())
                 {
                     string text = Clipboard.GetText(TextDataFormat.Text);
+                    PasteCleaner cleaner = new PasteCleaner();
 
-                    if (PasteCleaner.IsDirty(text))
+                    if (cleaner.IsDirty(text))
                     {
-                        string clean = PasteCleaner.Clean(text);
+                        string clean = cleaner.Clean(text);
                         Clipboard.SetText(clean);
                     }
                 }
