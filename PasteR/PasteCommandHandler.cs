@@ -37,7 +37,10 @@ namespace PasteR
                     EditPoint start = doc.Selection.TopPoint.CreateEditPoint();
 
                     // First insert plain text
+                    _dte.UndoContext.Open("Paste");
                     doc.Selection.Insert(text);
+                    _dte.UndoContext.Close();
+
 
                     // Then replace with clean text, so undo restores the default behavior
                     ReplaceText(doc, start, text);

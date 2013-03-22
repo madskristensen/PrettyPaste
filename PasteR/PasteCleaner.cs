@@ -79,8 +79,7 @@ namespace PasteR
             if (_hasLineNumbers)
                 result = CleanLineNumbers(result);
 
-            // Add a trailing newline to mimick the VS default paste behavior.
-            return result + Environment.NewLine;
+            return result;
         }
 
         private string CleanLineNumbers(string result)
