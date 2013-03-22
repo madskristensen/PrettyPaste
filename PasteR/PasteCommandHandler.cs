@@ -1,47 +1,89 @@
-﻿using Microsoft.VisualStudio;
+﻿using EnvDTE;
+using EnvDTE80;
+using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.OLE.Interop;
+using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.TextManager.Interop;
 using System;
 using System.Windows.Forms;
+using System.Windows.Threading;
 
 namespace PasteR
 {
-    class PasteCommandHandler : IOleCommandTarget
+    internal class PasteCommandHandler : IOleCommandTarget
     {
-        private const uint _commandId = 26; // The Paste command
-        private ITextView _textView;
-        private IOleCommandTarget _nextCommandTarget;        
+        private readonly Guid _guid = VSConstants.GUID_VSStandardCommandSet97; // The command category
+        private readonly uint _commandId = 26; // The Paste command in the command category
 
-        public PasteCommandHandler(IVsTextView adapter, ITextView textView)
+        private ITextView _textView;
+        private IOleCommandTarget _nextCommandTarget;
+        private DTE2 _dte;
+
+        public PasteCommandHandler(IVsTextView adapter, ITextView textView, DTE2 dte)
         {
-            this._textView = textView;
-            adapter.AddCommandFilter(this, out _nextCommandTarget);
+            _textView = textView;
+            _dte = dte;
+            adapter.AddCommandFilter(this, out _nextCommandTarget);            
         }
 
         public int Exec(ref Guid pguidCmdGroup, uint nCmdID, uint nCmdexecopt, IntPtr pvaIn, IntPtr pvaOut)
         {
-            if (pguidCmdGroup == typeof(VSConstants.VSStd97CmdID).GUID && nCmdID == _commandId)
+            if (pguidCmdGroup == _guid && nCmdID == _commandId)
             {
                 if (Clipboard.ContainsText())
-                {
-                    string text = Clipboard.GetText(TextDataFormat.Text);
-                    PasteCleaner cleaner = new PasteCleaner();
-
-                    if (cleaner.IsDirty(text))
+                {   
+                    TextDocument doc = (TextDocument)_dte.ActiveDocument.Object("TextDocument");
+                    EditPoint start = doc.Selection.ActivePoint.CreateEditPoint();
+                    
+                    // Run the PasteR code after the default paste, so undo restores default
+                    Dispatcher.CurrentDispatcher.BeginInvoke(new Action(() =>
                     {
-                        string clean = cleaner.Clean(text);
-                        Clipboard.SetText(clean);
-                    }
+                        ReplaceText(doc, start, _textView.Caret.Position.BufferPosition);
+                    }), DispatcherPriority.Normal, null);
                 }
             }
 
             return _nextCommandTarget.Exec(ref pguidCmdGroup, nCmdID, nCmdexecopt, pvaIn, pvaOut);
         }
 
+        private void ReplaceText(TextDocument doc, EditPoint start, int length)
+        {
+            string text = Clipboard.GetText(TextDataFormat.Text);
+            PasteCleaner cleaner = new PasteCleaner(text);
+
+            if (cleaner.IsDirty())
+            {
+                string clean = cleaner.Clean();
+
+                _dte.UndoContext.Open("Paste FixR");
+
+                // Insert
+                var edit = doc.CreateEditPoint(start);
+                edit.ReplaceText(length, clean, 0);
+                
+                // Format
+                doc.Selection.MoveToPoint(edit, true);
+                FormatSelection();
+                _textView.Selection.Clear();
+
+                _dte.UndoContext.Close();
+            }
+        }
+
+        private void FormatSelection()
+        {
+            Command command = _dte.Commands.Item("Edit.FormatSelection");
+            
+            if (command.IsAvailable)
+            {
+                _dte.ExecuteCommand("Edit.FormatSelection");
+            }
+        }
+
         public int QueryStatus(ref Guid pguidCmdGroup, uint cCmds, OLECMD[] prgCmds, IntPtr pCmdText)
         {
-            if (pguidCmdGroup == typeof(VSConstants.VSStd97CmdID).GUID)
+            if (pguidCmdGroup == _guid)
             {
                 for (int i = 0; i < cCmds; i++)
                 {

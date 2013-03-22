@@ -1,4 +1,7 @@
-﻿using Microsoft.VisualStudio.Editor;
+﻿using EnvDTE;
+using EnvDTE80;
+using Microsoft.VisualStudio.Editor;
+using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.TextManager.Interop;
 using Microsoft.VisualStudio.Utilities;
@@ -17,7 +20,9 @@ namespace PasteR
         public void VsTextViewCreated(IVsTextView textViewAdapter)
         {
             var textView = EditorAdaptersFactoryService.GetWpfTextView(textViewAdapter);
-            textView.Properties.GetOrCreateSingletonProperty<PasteCommandHandler>(() => new PasteCommandHandler(textViewAdapter, textView));
+            var dte = ServiceProvider.GlobalProvider.GetService(typeof(DTE)) as DTE2;
+
+            textView.Properties.GetOrCreateSingletonProperty<PasteCommandHandler>(() => new PasteCommandHandler(textViewAdapter, textView, dte));
         }
     }
 }

@@ -8,10 +8,16 @@ namespace PasteR
     {
         private bool _hasExtraLineBreaks, _hasLineNumbers, _hasOrphanedLineNumbers;
         private const string _regex = @"^([\d]+)(\s|\.)?";
+        private string _text;
 
-        public bool IsDirty(string content)
+        public PasteCleaner(string text)
         {
-            string[] lines = content.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
+            _text = text;
+        }
+
+        public bool IsDirty()
+        {
+            string[] lines = _text.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
 
             // No reason to mark less than 3 lines of code dirty
             if (lines.Length < 2)
@@ -50,9 +56,9 @@ namespace PasteR
             return _hasExtraLineBreaks || _hasOrphanedLineNumbers || _hasLineNumbers;
         }
 
-        public string Clean(string content)
+        public string Clean()
         {
-            string[] lines = content.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            string[] lines = _text.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
             List<string> cleanLines = new List<string>(lines);
 
             if (_hasOrphanedLineNumbers)
