@@ -27,26 +27,23 @@ namespace PasteR
 
         public int Exec(ref Guid pguidCmdGroup, uint nCmdID, uint nCmdexecopt, IntPtr pvaIn, IntPtr pvaOut)
         {
-            if (pguidCmdGroup == _guid && nCmdID == _commandId)
+            if (pguidCmdGroup == _guid && nCmdID == _commandId && Clipboard.ContainsText())
             {
-                if (Clipboard.ContainsText())
-                {
-                    string text = Clipboard.GetText(TextDataFormat.Text);
+                string text = Clipboard.GetText(TextDataFormat.Text);
 
-                    TextDocument doc = (TextDocument)_dte.ActiveDocument.Object("TextDocument");
-                    EditPoint start = doc.Selection.TopPoint.CreateEditPoint();
+                TextDocument doc = (TextDocument)_dte.ActiveDocument.Object("TextDocument");
+                EditPoint start = doc.Selection.TopPoint.CreateEditPoint();
 
-                    // First insert plain text
-                    _dte.UndoContext.Open("Paste");
-                    doc.Selection.Insert(text);
-                    _dte.UndoContext.Close();
+                // First insert plain text
+                _dte.UndoContext.Open("Paste");
+                doc.Selection.Insert(text);
+                _dte.UndoContext.Close();
 
 
-                    // Then replace with clean text, so undo restores the default behavior
-                    ReplaceText(doc, start, text);
+                // Then replace with clean text, so undo restores the default behavior
+                ReplaceText(doc, start, text);
 
-                    return VSConstants.S_OK;
-                }
+                return VSConstants.S_OK;
             }
 
             return _nextCommandTarget.Exec(ref pguidCmdGroup, nCmdID, nCmdexecopt, pvaIn, pvaOut);
