@@ -11,8 +11,8 @@ namespace PasteR
 {
     internal class PasteCommandHandler : IOleCommandTarget
     {
-        private readonly Guid _guid = VSConstants.GUID_VSStandardCommandSet97; // The command category
-        private readonly uint _commandId = 26; // The Paste command in the command category
+        private readonly Guid _guid = VSConstants.GUID_VSStandardCommandSet97; // The VSConstants.VSStd97CmdID enumeration
+        private readonly uint _commandId = (uint)VSConstants.VSStd97CmdID.Paste; // The paste command in the above enumeration
 
         private ITextView _textView;
         private IOleCommandTarget _nextCommandTarget;
