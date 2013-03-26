@@ -20,7 +20,7 @@ namespace PasteR
             string[] lines = _text.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
 
             // No reason to mark less than 3 lines of code dirty
-            if (lines.Length < 2)
+            if (lines.Length < 3)
                 return false;
             
             float emptyCounter = 0;
@@ -31,7 +31,7 @@ namespace PasteR
             bool prevIsEmpty = false;
             int parsed = 0;
 
-            for (int i = 0; i < Math.Min(lines.Length, 25); i++)
+            for (int i = 0; i < lines.Length; i++)
             {
                 bool isEmpty = lines[i].Length == 0;
                 bool isOrphaned = int.TryParse(lines[i], out parsed);

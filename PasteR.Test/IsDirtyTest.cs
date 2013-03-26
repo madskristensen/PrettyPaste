@@ -44,5 +44,13 @@ namespace PasteR.Test
             Assert.AreEqual(expected, actual);
         }
 
+        [TestMethod, TestCategory("IsDirty")]
+        public void IsDirty5()
+        {
+            string raw = "        [Authorize]\r\n        public ActionResult Edit(int id)\r\n";
+            bool expected = false;
+            bool actual = new PasteCleaner(raw).IsDirty();
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
