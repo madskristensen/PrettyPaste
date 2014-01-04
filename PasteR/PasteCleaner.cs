@@ -7,7 +7,7 @@ namespace PasteR
     public class PasteCleaner
     {
         private bool _hasExtraLineBreaks, _hasLineNumbers, _hasOrphanedLineNumbers;
-        private const string _regex = @"^([\d]+)(\s|\.)?";
+        private const string _regex = @"^([\d]+|\+|\-)(\s|\.)?";
         private string _text;
 
         public PasteCleaner(string text)
