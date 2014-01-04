@@ -52,8 +52,8 @@ namespace PasteR.Test
         [TestMethod, TestCategory("Clean")]
         public void PlusGitHub()
         {
-          string raw = "+        private const string _regex = @\"^([\\d]+|\\+|\\-)(\\s|\\.)?\";";
-          string expected = "private const string _regex = @\"^([\\d]+|\\+|\\-)(\\s|\\.)?\";";
+          string raw = "+        private const string _regex = @\"^([\\d]+|\\+|\\-)(\\s|\\.)?\";\r\n+        private const string _regex = @\"^([\\d]+|\\+|\\-)(\\s|\\.)?\";\r\n+        private const string _regex = @\"^([\\d]+|\\+|\\-)(\\s|\\.)?\";\r\n";
+          string expected = "       private const string _regex = @\"^([\\d]+|\\+|\\-)(\\s|\\.)?\";\r\n       private const string _regex = @\"^([\\d]+|\\+|\\-)(\\s|\\.)?\";\r\n       private const string _regex = @\"^([\\d]+|\\+|\\-)(\\s|\\.)?\";";
 
           _cleaner = new PasteCleaner(raw);
           _cleaner.IsDirty();
@@ -65,8 +65,8 @@ namespace PasteR.Test
         [TestMethod, TestCategory("Clean")]
         public void MinusGitHub()
         {
-          string raw = "-        private const string _regex = @\"^([\\d]+|\\+|\\-)(\\s|\\.)?\";";
-          string expected = "private const string _regex = @\"^([\\d]+|\\+|\\-)(\\s|\\.)?\";";
+          string raw = "-        private const string _regex = @\"^([\\d]+|\\+|\\-)(\\s|\\.)?\";\r\n-        private const string _regex = @\"^([\\d]+|\\+|\\-)(\\s|\\.)?\";\r\n-        private const string _regex = @\"^([\\d]+|\\+|\\-)(\\s|\\.)?\";\r\n";
+          string expected = "       private const string _regex = @\"^([\\d]+|\\+|\\-)(\\s|\\.)?\";\r\n       private const string _regex = @\"^([\\d]+|\\+|\\-)(\\s|\\.)?\";\r\n       private const string _regex = @\"^([\\d]+|\\+|\\-)(\\s|\\.)?\";";
 
           _cleaner = new PasteCleaner(raw);
           _cleaner.IsDirty();
