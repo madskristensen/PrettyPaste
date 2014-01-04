@@ -49,6 +49,31 @@ namespace PasteR.Test
             Assert.AreEqual(expected, actual);
         }
 
+        [TestMethod, TestCategory("Clean")]
+        public void PlusGitHub()
+        {
+          string raw = "+        private const string _regex = @\"^([\\d]+|\\+|\\-)(\\s|\\.)?\";";
+          string expected = "private const string _regex = @\"^([\\d]+|\\+|\\-)(\\s|\\.)?\";";
+
+          _cleaner = new PasteCleaner(raw);
+          _cleaner.IsDirty();
+
+          string actual = _cleaner.Clean();
+          Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod, TestCategory("Clean")]
+        public void MinusGitHub()
+        {
+          string raw = "-        private const string _regex = @\"^([\\d]+|\\+|\\-)(\\s|\\.)?\";";
+          string expected = "private const string _regex = @\"^([\\d]+|\\+|\\-)(\\s|\\.)?\";";
+
+          _cleaner = new PasteCleaner(raw);
+          _cleaner.IsDirty();
+
+          string actual = _cleaner.Clean();
+          Assert.AreEqual(expected, actual);
+        }
 
     }
 }
