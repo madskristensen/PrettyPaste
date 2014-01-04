@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TextManager.Interop;
 using Microsoft.VisualStudio.Utilities;
 using System.ComponentModel.Composition;
 
-namespace PasteR
+namespace PrettyPaste
 {
     [Export(typeof(IVsTextViewCreationListener))]
     [ContentType("text")]

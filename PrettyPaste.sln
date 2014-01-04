@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PasteR", "PasteR\PasteR.csproj", "{05ABC829-7EAA-4823-8AF1-75092CCFB92E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrettyPaste", "PrettyPaste\PrettyPaste.csproj", "{05ABC829-7EAA-4823-8AF1-75092CCFB92E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PasteR.Test", "PasteR.Test\PasteR.Test.csproj", "{11A81423-CFB7-4509-A129-EBD326F425F4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrettyPaste.Test", "PrettyPaste.Test\PrettyPaste.Test.csproj", "{11A81423-CFB7-4509-A129-EBD326F425F4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{28AE849C-5DEA-4876-B571-0F491CC1859B}"
 	ProjectSection(SolutionItems) = preProject

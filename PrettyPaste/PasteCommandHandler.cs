@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TextManager.Interop;
 using System;
 using System.Windows.Forms;
 
-namespace PasteR
+namespace PrettyPaste
 {
     internal class PasteCommandHandler : IOleCommandTarget
     {

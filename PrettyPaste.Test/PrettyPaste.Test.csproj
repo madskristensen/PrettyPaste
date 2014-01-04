@@ -55,9 +55,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PasteR\PasteR.csproj">
+    <ProjectReference Include="..\PrettyPaste\PrettyPaste.csproj">
       <Project>{05abc829-7eaa-4823-8af1-75092ccfb92e}</Project>
-      <Name>PasteR</Name>
+      <Name>PrettyPaste</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

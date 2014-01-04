@@ -1,8 +1,8 @@
 ﻿using System;
-using PasteR;
+using PrettyPaste;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace PasteR.Test
+namespace PrettyPaste.Test
 {
     [TestClass]
     public class CleanTest
