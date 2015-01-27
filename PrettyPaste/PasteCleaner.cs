@@ -50,7 +50,7 @@ namespace PrettyPaste
             }
 
             _hasExtraLineBreaks = (float)lines.Length / emptyCounter < 4.2F;
-            _hasOrphanedLineNumbers = (float)lines.Length / orphanCounter < 2.4F;
+            _hasOrphanedLineNumbers = (float)lines.Length / orphanCounter < 6F;
             _hasLineNumbers = (lines.Length - emptyCounter) / numberCounter < 2.2F;
 
             return _hasExtraLineBreaks || _hasOrphanedLineNumbers || _hasLineNumbers;

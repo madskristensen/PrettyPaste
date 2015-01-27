@@ -10,7 +10,7 @@ using System.ComponentModel.Composition;
 namespace PrettyPaste
 {
     [Export(typeof(IVsTextViewCreationListener))]
-    [ContentType("text")]
+    [ContentType("code")]
     [TextViewRole(PredefinedTextViewRoles.Document)]
     class PasteTextViewCreationListener : IVsTextViewCreationListener
     {
