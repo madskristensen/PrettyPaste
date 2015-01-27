@@ -48,7 +48,7 @@ namespace PrettyPaste.Test
         public void IsDirty5()
         {
             string raw = "        [Authorize]\r\n        public ActionResult Edit(int id)\r\n";
-            bool expected = false;
+            bool expected = true;
             bool actual = new PasteCleaner(raw).IsDirty();
             Assert.AreEqual(expected, actual);
         }
